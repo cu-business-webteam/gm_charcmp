@@ -56,7 +56,7 @@
 		<Reference Include="System.Xml" />
 	</ItemGroup>
 	<ItemGroup>
-		<Compile Include="Program.cs" />
+		<Compile Include="src\Program.cs" />
 		<Compile Include="AssemblyInfo.cs" />
 	</ItemGroup>
 	<ItemGroup>
