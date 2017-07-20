@@ -6,15 +6,22 @@ namespace CharCmp {
 
 		[System.STAThread]
 		public static System.Int32 Main( System.String[] args ) {
-			if ( ( null == args ) || ( args.Length < 4 ) || ( 0 != ( args.Length % 2 ) ) ) {
+			var output = 2;
+
+			if ( null == args ) {
 				PrintUsage();
-				return 2;
+				return output;
+			}
+
+			var len = args.Length;
+			if ( ( len < 4 ) || ( 6 < len ) || ( 0 != ( len % 2 ) ) ) {
+				PrintUsage();
+				return output;
 			}
 
 			System.String left = null;
 			System.String right = null;
-			System.String cp = null;
-			var l = args.Length;
+			System.String cp = "windows-1252";
 			var i = 0;
 			do {
 				if ( args[ i ].Equals( "/fileA", System.StringComparison.OrdinalIgnoreCase ) ) {
@@ -25,17 +32,14 @@ namespace CharCmp {
 					cp = args[ ++i ].Trim();
 				} else {
 					PrintUsage();
-					return 2;
+					return output;
 				}
-			} while ( ++i < l );
+			} while ( ++i < len );
 			if ( System.String.IsNullOrEmpty( left ) || System.String.IsNullOrEmpty( right ) ) {
 				PrintUsage();
-				return 2;
+				return output;
 			}
 
-			if ( System.String.IsNullOrEmpty( cp ) ) {
-				cp = "windows-1252";
-			}
 			System.Text.Encoding encoding = System.Text.Encoding.GetEncoding( cp );
 			if ( null == encoding ) {
 				System.Int32 cpn;
@@ -44,13 +48,16 @@ namespace CharCmp {
 				}
 			}
 			if ( null == encoding ) {
-				encoding = System.Text.Encoding.GetEncoding( "windows-1252" );
+				PrintUnkCodePage();
+				return output;
 			}
 
-			return IsSameByCharValue( left, right, encoding )
+			output = IsSameByCharValue( left, right, encoding )
 				? 0
 				: 1
 			;
+
+			return output;
 		}
 
 		private static System.Boolean IsSameByCharValue( System.String left, System.String right, System.Text.Encoding encoding ) {
@@ -127,6 +134,10 @@ namespace CharCmp {
 			err.WriteLine( "Example: CharCmp.exe /fileA .\\groceries.txt /fileB \\users\\home\\foo123\\groc.list.txt" );
 			err.WriteLine( "Example: CharCmp.exe /fileA .\\letters\\to\\cleo.txt /fileB ..\\something.else /cp us-ascii" );
 			err.WriteLine( "The default code-page is Windows-1252" );
+		}
+		private static void PrintUnkCodePage() {
+			var err = System.Console.Error;
+			err.WriteLine( "An unknown code page was specified.  Please try a different code page value." );
 		}
 
 	}
