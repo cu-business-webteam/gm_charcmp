@@ -61,7 +61,6 @@ namespace CharCmp {
 		}
 
 		private static System.Boolean IsSameByCharValue( System.String left, System.String right, System.Text.Encoding encoding ) {
-#if TRACE || DEBUG
 			if ( null == right ) {
 				throw new System.ArgumentNullException( "right" );
 			} else if ( null == left ) {
@@ -69,7 +68,6 @@ namespace CharCmp {
 			} else if ( null == encoding ) {
 				throw new System.ArgumentNullException( "encoding" );
 			}
-#endif
 			using ( var leftF = System.IO.File.Open( left, System.IO.FileMode.Open, System.IO.FileAccess.Read, System.IO.FileShare.Read ) ) {
 				using ( var rightF = System.IO.File.Open( right, System.IO.FileMode.Open, System.IO.FileAccess.Read, System.IO.FileShare.Read ) ) {
 					return IsSameByCharValue( leftF, rightF, encoding );
