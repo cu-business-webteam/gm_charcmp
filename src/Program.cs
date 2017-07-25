@@ -129,9 +129,14 @@ namespace CharCmp {
 			var err = System.Console.Error;
 			err.WriteLine( "No! No! No! Use it like this, Einstein:" );
 			err.WriteLine( "CharCmp.exe /fileA pathNameOfFileA /fileB pathNameOfFileB [/cp codePageNameOrNumber]" );
-			err.WriteLine( "Example: CharCmp.exe /fileA .\\groceries.txt /fileB \\users\\home\\foo123\\groc.list.txt" );
-			err.WriteLine( "Example: CharCmp.exe /fileA .\\letters\\to\\cleo.txt /fileB ..\\something.else /cp us-ascii" );
-			err.WriteLine( "Example: CharCmp.exe /fileA .\\fileList.txt /fileB ..\\..\\foo\\bar.txt /cp 437" );
+			err.WriteLine( System.String.Empty );
+			err.WriteLine( "Example:" );
+			err.WriteLine( "CharCmp.exe /fileA .\\groceries.txt /fileB \\users\\home\\foo123\\groc.list.txt" );
+			err.WriteLine( "Example:" );
+			err.WriteLine( "CharCmp.exe /fileA .\\letters\\to\\cleo.txt /fileB ..\\something.else /cp us-ascii" );
+			err.WriteLine( "Example:" );
+			err.WriteLine( "CharCmp.exe /fileA .\\fileList.txt /fileB ..\\..\\foo\\bar.txt /cp 437" );
+			err.WriteLine( System.String.Empty );
 			err.WriteLine( "The default code-page is Windows-1252" );
 		}
 		private static void PrintUnkCodePage() {
